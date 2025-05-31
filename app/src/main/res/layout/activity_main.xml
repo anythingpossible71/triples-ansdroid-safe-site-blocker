@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f9fafb"
+    android:background="@color/background_gray"
     tools:context=".MainActivity">
 
     <!-- Header -->
@@ -14,21 +14,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="32dp"
+        android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
         android:gravity="center_vertical"
-        android:background="@android:color/white"
+        android:background="@color/header_white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:id="@+id/imageLogo"
-            android:layout_width="40dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_launcher_foreground"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/logo"
             android:contentDescription="Triples Logo" />
 
         <LinearLayout
@@ -40,30 +40,27 @@
 
             <TextView
                 android:id="@+id/textTitle"
+                style="@style/Triples.AppName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Triples"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:textColor="#111827" />
+                android:text="Triples" />
 
             <TextView
                 android:id="@+id/textSubtitle"
+                style="@style/Triples.AppSubtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Website Blocker"
-                android:textSize="15sp"
-                android:textColor="#6B7280" />
+                android:text="Website Blocker" />
         </LinearLayout>
 
         <ImageButton
             android:id="@+id/buttonAdd"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:backgroundTint="#60E329"
-            android:background="@android:color/white"
-            android:src="@android:drawable/ic_input_add"
-            android:elevation="4dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/primary_green"
+            android:background="@color/header_white"
+            android:src="@drawable/add_website"
+            android:elevation="8dp"
             android:contentDescription="Add Website"
             android:scaleType="center"
             android:layout_marginStart="8dp" />
@@ -75,8 +72,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+        android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

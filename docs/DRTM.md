@@ -31,4 +31,39 @@
 ---
 
 **Lesson:**
-> Never use a third-party library in your code before adding it to your build.gradle dependencies and syncing Gradle. 
+> Never use a third-party library in your code before adding it to your build.gradle dependencies and syncing Gradle.
+
+---
+
+## Issue: Card background color change not visible in app
+
+### Root Cause Analysis
+- **What happened:**
+  - We updated the website card background color using `android:background` on `MaterialCardView`, but did not see the change reflected in the app.
+- **Why it happened:**
+  - `MaterialCardView` does not use `android:background` for its card background. Instead, it uses the `app:cardBackgroundColor` attribute.
+  - Setting `android:background` only affects the view background, not the card's actual background color, which is drawn by the Material library.
+  - This is a common pitfall when working with Material Components in Android.
+
+### How to Fix
+1. **Use the correct attribute:**
+   - Set the card background color using `app:cardBackgroundColor` instead of `android:background`.
+   - Example:
+     ```xml
+     <com.google.android.material.card.MaterialCardView
+         ...
+         app:cardBackgroundColor="@color/card_white"
+         ...>
+     ```
+2. **Rebuild and rerun the app** to see the change.
+
+### How to Avoid This in the Future
+- **Always check the official documentation for the correct attributes for Material Components.**
+- **If a UI change is not visible, review the component's documentation and attribute precedence.**
+- **Search for component-specific attributes (e.g., `cardBackgroundColor` for `MaterialCardView`).**
+- **Test small changes incrementally and verify after each change.**
+
+---
+
+**Lesson:**
+> When working with Material Components, always use the component-specific attributes for styling (e.g., `app:cardBackgroundColor` for cards) instead of generic Android attributes. 

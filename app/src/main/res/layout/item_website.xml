@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="8dp"
-    android:layout_marginVertical="8dp"
+    android:layout_marginBottom="12dp"
     app:cardCornerRadius="16dp"
-    app:cardElevation="2dp"
-    app:strokeWidth="0dp">
+    app:cardElevation="1dp"
+    app:strokeWidth="0dp"
+    app:cardBackgroundColor="@color/card_white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,20 +34,17 @@
 
             <TextView
                 android:id="@+id/textWebsiteUrl"
+                style="@style/Triples.WebsiteUrl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="example.com"
-                android:textColor="#111827"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:text="example.com" />
 
             <TextView
                 android:id="@+id/textWebsiteStatus"
+                style="@style/Triples.StatusText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Blocked"
-                android:textColor="#6B7280"
-                android:textSize="12sp" />
+                android:text="Blocked" />
 
         </LinearLayout>
 
@@ -56,18 +53,18 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="8dp"
-            android:backgroundTint="#FEE2E2"
-            android:background="@android:color/white"
-            android:src="@android:drawable/ic_lock_lock"
+            android:backgroundTint="@color/red_50"
+            android:background="@color/white"
+            android:src="@drawable/locked"
             android:contentDescription="Toggle block status" />
 
         <ImageButton
             android:id="@+id/buttonRemove"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:backgroundTint="#F3F4F6"
-            android:background="@android:color/white"
-            android:src="@android:drawable/ic_menu_delete"
+            android:backgroundTint="@color/gray_100"
+            android:background="@color/white"
+            android:src="@drawable/trash"
             android:contentDescription="Remove website" />
 
     </LinearLayout>
