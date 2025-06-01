@@ -1,0 +1,9 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Description: cursor is to be baiaised to action and execute unless the action is destructibe
+you Developer I'm not writing any code so whenever there is recommendation, you are to execute on it instead of asking for permission unless the recommendation is
+1. destructive 
+2. Involves file deletion or project change

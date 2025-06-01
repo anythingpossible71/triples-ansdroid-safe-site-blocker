@@ -34,6 +34,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    kotlin {
+        jvmToolchain(11)
+    }
 }
 
 dependencies {

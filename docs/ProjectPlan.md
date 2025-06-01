@@ -8,16 +8,16 @@ This checklist is a living document to track our progress and next steps for the
 - [x] Initialize Android project with Kotlin & Jetpack Compose
 - [x] Configure build.gradle with all required dependencies
 - [ ] Set up MVVM project structure
-- [ ] Add brand colors and theme
-- [ ] Import SVG icons as vector drawables
+- [x] Add brand colors and theme
+- [x] Import SVG icons as vector drawables
 - [x] Add placeholder graphics to app/graphics
 
 ## Phase 2: UI Scaffolding
 - [x] Create main screen layout (header, website list, add button)
-- [ ] Implement Website card UI (favicon, URL, status, lock/unlock, delete)
+- [x] Implement Website card UI (favicon, URL, status, lock/unlock, delete)
 - [ ] Add empty state UI
 - [ ] Add modal dialog for adding websites
-- [ ] Integrate custom icons into UI
+- [x] Integrate custom icons into UI
 
 ## Phase 3: Data Layer
 - [ ] Create Website data model
@@ -49,4 +49,9 @@ This checklist is a living document to track our progress and next steps for the
 
 ---
 
-**Add notes, issues, or completed items below as we progress!** 
+**Add notes, issues, or completed items below as we progress!**
+
+# Suggested Next Steps
+# 1. Add empty state UI (for when no websites are present)
+# 2. Add modal dialog for adding websites
+# 3. (Optional) Start on data model and Room database setup 

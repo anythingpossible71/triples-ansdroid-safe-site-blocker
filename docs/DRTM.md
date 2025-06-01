@@ -66,4 +66,31 @@
 ---
 
 **Lesson:**
-> When working with Material Components, always use the component-specific attributes for styling (e.g., `app:cardBackgroundColor` for cards) instead of generic Android attributes. 
+> When working with Material Components, always use the component-specific attributes for styling (e.g., `app:cardBackgroundColor` for cards) instead of generic Android attributes.
+
+---
+
+## Issue: Glide RequestListener Kotlin/Java Interop Regression
+
+### Root Cause Analysis
+- **What happened:**
+  - Build failures occurred with errors like "does not implement abstract member" for Glide's `RequestListener` when using Kotlin anonymous classes.
+- **Why it happened:**
+  - Glide's `RequestListener` interface has subtle nullability and method signature differences between Java and Kotlin, especially in Glide 4.16.0+.
+  - Kotlin's type inference does not always match Glide's Java interface, causing cryptic build errors.
+  - Reverting to a Kotlin anonymous listener reintroduced the regression.
+
+### How to Fix
+1. **Always use a Java implementation for Glide listeners:**
+   - Use `FaviconRequestListener.java` (or any Java-based listener) for all Glide `.listener()` callbacks.
+   - If custom logic is needed, extend the Java class or use a callback/lambda pattern.
+2. **Never use Kotlin anonymous classes for Glide listeners:**
+   - Do **not** use `object : RequestListener<Drawable> { ... }` in Kotlin for Glide.
+   - If you see a Kotlin anonymous Glide listener, refactor it to use the Java class.
+
+### How to Avoid This in the Future
+- If you need custom fallback or error logic, extend the Java listener or use a callback.
+- If you see a Kotlin anonymous Glide listener, refactor it to use the Java class.
+
+**Lesson:**
+> For Glide listeners, always use a Java implementation to avoid Kotlin/Java interop issues. 

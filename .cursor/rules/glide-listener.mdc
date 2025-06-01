@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Description: 
+This rule that ensures we use Java listiner
+
+Rule:
+> All Glide .listener() usages in the codebase must use a Java implementation (e.g., FaviconRequestListener.java).
+> Do not use Kotlin anonymous classes or lambdas for Glide RequestListener implementations.
