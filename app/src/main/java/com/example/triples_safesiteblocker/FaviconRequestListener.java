@@ -32,12 +32,12 @@ public class FaviconRequestListener implements RequestListener<Drawable> {
                 Glide.with(context)
                         .load("https://www.google.com/s2/favicons?sz=64&domain_url=https://" + fallbackHost)
                         .placeholder(R.drawable.bg_favicon)
-                        .error(android.R.drawable.ic_menu_report_image)
+                        .error(R.drawable.no_fav_icon)
                         .into(faviconView);
             });
             return true;
         } else {
-            faviconView.setImageResource(android.R.drawable.ic_menu_report_image);
+            faviconView.setImageResource(R.drawable.no_fav_icon);
             return true;
         }
     }

@@ -1,0 +1,32 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+
+
+
+Description: this rule ensure we have the right room dependencies
+Whenever you use Room annotations (such as @Entity, @Dao, @Database), you must add the required Room dependencies and enable kapt (Kotlin annotation processing) in your build.gradle.kts file.
+
+
+## Project Rule: Always Add Room Dependencies and Enable KAPT When Using Room
+
+Reason:
+- If Room dependencies or kapt are missing, the annotation processor cannot generate the required code, resulting in build errors like `@error.NonExistentClass` and `incompatible types: NonExistentClass cannot be converted to Annotation`.
+- This error is cryptic and can be avoided by always including the correct dependencies and plugins.
+
+Fix
+- Add the following to your dependencies block:
+  ```kotlin
+  implementation("androidx.room:room-runtime:2.6.1")
+  kapt("androidx.room:room-compiler:2.6.1")
+  implementation("androidx.room:room-ktx:2.6.1")
+  ```
+- Ensure you have `id("kotlin-kapt")` in your plugins block.
+- Sync Gradle after making these changes.
+
+Summary:
+This rule prevents build failures caused by missing annotation processors for Room. Always add the required Room dependencies and enable kapt before using Room annotations in your codebase.
+

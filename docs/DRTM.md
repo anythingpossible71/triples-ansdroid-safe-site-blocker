@@ -93,4 +93,84 @@
 - If you see a Kotlin anonymous Glide listener, refactor it to use the Java class.
 
 **Lesson:**
-> For Glide listeners, always use a Java implementation to avoid Kotlin/Java interop issues. 
+> For Glide listeners, always use a Java implementation to avoid Kotlin/Java interop issues.
+
+---
+
+## Project Rule: Use Only `adapterPosition` in ViewHolders (Kotlin)
+
+**Description:**
+Always use `adapterPosition` to get the position of a ViewHolder in Kotlin code. Do not use `bindingAdapterPosition` unless the project is explicitly upgraded to a RecyclerView version that supports it and there is a clear need (e.g., merged adapters in Java). 
+
+**Reason:**
+- `bindingAdapterPosition` is not available in the current version of the AndroidX RecyclerView library used by this project.
+- Using `bindingAdapterPosition` causes unresolved reference build errors in Kotlin.
+- `adapterPosition` is the standard and supported property for getting the ViewHolder position in Kotlin for this codebase.
+
+**Fix:**
+- Replace any usage of `bindingAdapterPosition` with `adapterPosition` in all ViewHolder implementations.
+- Only consider `bindingAdapterPosition` if the project is upgraded and there is a specific advanced use case.
+
+**Summary:**
+This rule prevents build errors caused by referencing properties that do not exist in the current environment. Always use `adapterPosition` for compatibility and reliability. 
+
+---
+
+## Project Rule: Always Add Room Dependencies and Enable KAPT When Using Room
+
+**Description:**
+Whenever you use Room annotations (such as @Entity, @Dao, @Database), you must add the required Room dependencies and enable kapt (Kotlin annotation processing) in your build.gradle.kts file.
+
+**Reason:**
+- If Room dependencies or kapt are missing, the annotation processor cannot generate the required code, resulting in build errors like `@error.NonExistentClass` and `incompatible types: NonExistentClass cannot be converted to Annotation`.
+- This error is cryptic and can be avoided by always including the correct dependencies and plugins.
+
+**Fix:**
+- Add the following to your dependencies block:
+  ```kotlin
+  implementation("androidx.room:room-runtime:2.6.1")
+  kapt("androidx.room:room-compiler:2.6.1")
+  implementation("androidx.room:room-ktx:2.6.1")
+  ```
+- Ensure you have `id("kotlin-kapt")` in your plugins block.
+- Sync Gradle after making these changes.
+
+**Summary:**
+This rule prevents build failures caused by missing annotation processors for Room. Always add the required Room dependencies and enable kapt before using Room annotations in your codebase. 
+
+---
+
+## Issue: VPN Service Start/Stop Reliability and Seamless Operations
+
+### Root Cause Analysis
+- **What happened:**
+  - The VPN toggle sometimes failed to stop the VPN service, leaving the VPN running in the background or not releasing resources properly.
+  - Attempts to stop the service using `stopService()` or UI toggles alone were unreliable.
+- **Why it happened:**
+  - The VPN service (`TriplesVpnService`) requires explicit cleanup and must call `stopSelf()` to fully release the VPN interface and system resources.
+  - Communication between the UI and the service was not robust enough to guarantee proper lifecycle handling.
+  - Lack of detailed logging made it hard to diagnose where the stop/start process was failing.
+
+### How to Fix
+1. **Use explicit intent actions for service control:**
+   - Start and stop the VPN service using explicit intent actions (e.g., `"STOP_VPN"`).
+   - Ensure the service listens for these actions and performs the correct lifecycle operations.
+2. **Ensure proper cleanup in the service:**
+   - Always close the VPN interface and call `stopSelf()` when stopping the service.
+   - Release all resources and update notifications/UI as needed.
+3. **Add robust logging:**
+   - Log all major lifecycle events (start, stop, cleanup, errors) in the service and related UI code.
+4. **Synchronize UI and service state:**
+   - Keep the UI toggle in sync with the actual VPN state, using LiveData, BroadcastReceivers, or similar mechanisms if needed.
+5. **Test on real devices:**
+   - Always verify VPN behavior on actual hardware, as emulator behavior may differ.
+
+### How to Avoid This in the Future
+- **Always use explicit, intent-based communication for service lifecycle control.**
+- **Ensure the service performs full cleanup and calls `stopSelf()` on stop.**
+- **Maintain detailed logs for all VPN operations.**
+- **Keep UI and service state synchronized.**
+- **Document the correct start/stop approach in the codebase and DRTM.**
+
+**Lesson:**
+> Seamless VPN operations require explicit lifecycle management, robust intent-based communication, thorough cleanup in the service, detailed logging, and UI-state synchronization. Always document and follow these practices to avoid regressions and ensure reliability. 

@@ -16,11 +16,11 @@ This checklist is a living document to track our progress and next steps for the
 - [x] Create main screen layout (header, website list, add button)
 - [x] Implement Website card UI (favicon, URL, status, lock/unlock, delete)
 - [ ] Add empty state UI
-- [ ] Add modal dialog for adding websites
+- [x] Add modal dialog for adding websites
 - [x] Integrate custom icons into UI
 
 ## Phase 3: Data Layer
-- [ ] Create Website data model
+- [x] Create Website data model
 - [ ] Set up Room database for website storage
 - [ ] Implement DAO for website operations
 - [ ] Create WebsiteRepository
@@ -28,10 +28,10 @@ This checklist is a living document to track our progress and next steps for the
 - [ ] Implement URL validation/cleaning utilities
 
 ## Phase 4: Core Functionality
-- [ ] Add website to block list
-- [ ] Remove website from block list
-- [ ] Toggle website block state (locked/unlocked)
-- [ ] Display website favicons
+- [x] Add website to block list
+- [x] Remove website from block list
+- [x] Toggle website block state (locked/unlocked)
+- [x] Display website favicons
 - [ ] Persist website list across app restarts
 
 ## Phase 5: VPN Integration
@@ -49,9 +49,10 @@ This checklist is a living document to track our progress and next steps for the
 
 ---
 
-**Add notes, issues, or completed items below as we progress!**
+**Notes:**
+- Toasts are now shown for block/unblock actions.
 
 # Suggested Next Steps
-# 1. Add empty state UI (for when no websites are present)
-# 2. Add modal dialog for adding websites
-# 3. (Optional) Start on data model and Room database setup 
+1. Add empty state UI for when no websites are present (Phase 2)
+2. Refine UI/UX (spacing, colors, animations) (Phase 6)
+3. (Optional) Start on VPN integration (Phase 5) 
